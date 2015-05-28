@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+         <!-- Create transporters -->
+
+        <record id="res_partner_cpost" model="res.partner">
+            <field name="name">Canada Post</field>
+            <field name="is_company">1</field>
+            <field name="customer">0</field>
+            <field name="supplier">1</field>
+        </record>
+        <record id="res_partner_ups" model="res.partner">
+            <field name="name">UPS</field>
+            <field name="customer">0</field>
+            <field name="supplier">1</field>
+        </record>
+
+        <!-- Create a service product -->
+
+        <record id="product_product_delivery_product" model="product.product">
+            <field name="name">Delivery</field>
+            <field name="default_code">Delivery</field>
+            <field name="type">service</field>
+            <!-- <field name="categ_id" ref="product.product_category_3"/> -->
+            <field name="standard_price">0.0</field>
+            <field name="list_price">0.0</field>
+            <!-- <field name="image" type="base64" file="delivery/static/img/product_product_delivery-image.jpg"/> -->
+        </record>
+        
+        <!--
+            Canada Post
+        -->
+            <!-- RegularParcel -->
+            <record id="cp_delivery_carrier_RegularParcel" model="delivery.carrier">
+                <field name="name">Canada Post Regular Parcel</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_RegularParcel" model="delivery.grid">
+                <field name="name">RegularParcel</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_RegularParcel"/>
+            </record>
+            <record id="cp_delivery_grid_line_RegularParcel" model="delivery.grid.line">
+                <field name="name">RegularParcel</field>
+                <field name="grid_id" ref="cp_delivery_grid_RegularParcel"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">RegularParcel</field>
+            </record>
+
+            <!-- ExpeditedParcel -->
+            <record id="cp_delivery_carrier_ExpeditedParcel" model="delivery.carrier">
+                <field name="name">Canada Post Expedited Parcel</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_ExpeditedParcel" model="delivery.grid">
+                <field name="name">ExpeditedParcel</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_ExpeditedParcel"/>
+            </record>
+            <record id="cp_delivery_grid_line_ExpeditedParcel" model="delivery.grid.line">
+                <field name="name">ExpeditedParcel</field>
+                <field name="grid_id" ref="cp_delivery_grid_ExpeditedParcel"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">ExpeditedParcel</field>
+            </record>
+            
+            <!-- Priority -->
+            <record id="cp_delivery_carrier_Priority" model="delivery.carrier">
+                <field name="name">Canada Post Priority</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_Priority" model="delivery.grid">
+                <field name="name">Priority</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_Priority"/>
+            </record>
+            <record id="cp_delivery_grid_line_Priority" model="delivery.grid.line">
+                <field name="name">Priority</field>
+                <field name="grid_id" ref="cp_delivery_grid_Priority"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">Priority</field>
+            </record>
+            
+            <!-- Xpresspost -->
+            <record id="cp_delivery_carrier_Xpresspost" model="delivery.carrier">
+                <field name="name">Canada Post Xpresspost</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_Xpresspost" model="delivery.grid">
+                <field name="name">Xpresspost</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_Xpresspost"/>
+            </record>
+            <record id="cp_delivery_grid_line_Xpresspost" model="delivery.grid.line">
+                <field name="name">Xpresspost</field>
+                <field name="grid_id" ref="cp_delivery_grid_Xpresspost"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">Xpresspost</field>
+            </record>
+            
+            <!-- ExpeditedParcelUSA -->
+            <record id="cp_delivery_carrier_ExpeditedParcelUSA" model="delivery.carrier">
+                <field name="name">Canada Post Expedited Parcel (USA)</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_ExpeditedParcelUSA" model="delivery.grid">
+                <field name="name">ExpeditedParcelUSA</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_ExpeditedParcelUSA"/>
+            </record>
+            <record id="cp_delivery_grid_line_ExpeditedParcelUSA" model="delivery.grid.line">
+                <field name="name">ExpeditedParcelUSA</field>
+                <field name="grid_id" ref="cp_delivery_grid_ExpeditedParcelUSA"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">ExpeditedParcelUSA</field>
+            </record>
+
+            <!-- XpresspostUSA -->
+            <record id="cp_delivery_carrier_XpresspostUSA" model="delivery.carrier">
+                <field name="name">Canada Post Xpresspost (USA)</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_XpresspostUSA" model="delivery.grid">
+                <field name="name">XpresspostUSA</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_XpresspostUSA"/>
+            </record>
+            <record id="cp_delivery_grid_line_XpresspostUSA" model="delivery.grid.line">
+                <field name="name">XpresspostUSA</field>
+                <field name="grid_id" ref="cp_delivery_grid_XpresspostUSA"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">XpresspostUSA</field>
+            </record>
+
+            <!-- SmallPacketUSAAir -->
+            <record id="cp_delivery_carrier_SmallPacketUSAAir" model="delivery.carrier">
+                <field name="name">Canada Post Small Packet Air (USA)</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_SmallPacketUSAAir" model="delivery.grid">
+                <field name="name">SmallPacketUSAAir</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_SmallPacketUSAAir"/>
+            </record>
+            <record id="cp_delivery_grid_line_SmallPacketUSAAir" model="delivery.grid.line">
+                <field name="name">SmallPacketUSAAir</field>
+                <field name="grid_id" ref="cp_delivery_grid_SmallPacketUSAAir"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">SmallPacketUSAAir</field>
+            </record>
+
+            <!-- TrackedPacketUSA -->
+            <record id="cp_delivery_carrier_TrackedPacketUSA" model="delivery.carrier">
+                <field name="name">Canada Post Tracked Packet (USA)</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_TrackedPacketUSA" model="delivery.grid">
+                <field name="name">TrackedPacketUSA</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_TrackedPacketUSA"/>
+            </record>
+            <record id="cp_delivery_grid_line_TrackedPacketUSA" model="delivery.grid.line">
+                <field name="name">TrackedPacketUSA</field>
+                <field name="grid_id" ref="cp_delivery_grid_TrackedPacketUSA"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">TrackedPacketUSA</field>
+            </record>
+
+            <!-- PriorityWorldwidePakUSA -->
+            <record id="cp_delivery_carrier_PriorityWorldwidePakUSA" model="delivery.carrier">
+                <field name="name">Canada Post Priority Worldwide Packet (USA)</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_PriorityWorldwidePakUSA" model="delivery.grid">
+                <field name="name">PriorityWorldwidePakUSA</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_PriorityWorldwidePakUSA"/>
+            </record>
+            <record id="cp_delivery_grid_line_PriorityWorldwidePakUSA" model="delivery.grid.line">
+                <field name="name">PriorityWorldwidePakUSA</field>
+                <field name="grid_id" ref="cp_delivery_grid_PriorityWorldwidePakUSA"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">PriorityWorldwidePakUSA</field>
+            </record>
+
+            <!-- XpresspostInternational -->
+            <record id="cp_delivery_carrier_XpresspostInternational" model="delivery.carrier">
+                <field name="name">Canada Post Xpresspost (International)</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_XpresspostInternational" model="delivery.grid">
+                <field name="name">XpresspostInternational</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_XpresspostInternational"/>
+            </record>
+            <record id="cp_delivery_grid_line_XpresspostInternational" model="delivery.grid.line">
+                <field name="name">XpresspostInternational</field>
+                <field name="grid_id" ref="cp_delivery_grid_XpresspostInternational"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">XpresspostInternational</field>
+            </record>
+
+            <!-- InternationalParcelSurface -->
+            <record id="cp_delivery_carrier_InternationalParcelSurface" model="delivery.carrier">
+                <field name="name">Canada Post Surface Parcel (International)</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_InternationalParcelSurface" model="delivery.grid">
+                <field name="name">InternationalParcelSurface</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_InternationalParcelSurface"/>
+            </record>
+            <record id="cp_delivery_grid_line_InternationalParcelSurface" model="delivery.grid.line">
+                <field name="name">InternationalParcelSurface</field>
+                <field name="grid_id" ref="cp_delivery_grid_InternationalParcelSurface"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">InternationalParcelSurface</field>
+            </record>
+
+            <!-- PriorityWorldwidePakIntl -->
+            <record id="cp_delivery_carrier_PriorityWorldwidePakIntl" model="delivery.carrier">
+                <field name="name">Canada Post Priority Worldwide Packet (International)</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_PriorityWorldwidePakIntl" model="delivery.grid">
+                <field name="name">PriorityWorldwidePakIntl</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_PriorityWorldwidePakIntl"/>
+            </record>
+            <record id="cp_delivery_grid_line_PriorityWorldwidePakIntl" model="delivery.grid.line">
+                <field name="name">PriorityWorldwidePakIntl</field>
+                <field name="grid_id" ref="cp_delivery_grid_PriorityWorldwidePakIntl"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">PriorityWorldwidePakIntl</field>
+            </record>
+
+            <!-- SmallPacketInternationalAir -->
+            <record id="cp_delivery_carrier_SmallPacketInternationalAir" model="delivery.carrier">
+                <field name="name">Canada Post Small Packet Air (International)</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_SmallPacketInternationalAir" model="delivery.grid">
+                <field name="name">SmallPacketInternationalAir</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_SmallPacketInternationalAir"/>
+            </record>
+            <record id="cp_delivery_grid_line_SmallPacketInternationalAir" model="delivery.grid.line">
+                <field name="name">SmallPacketInternationalAir</field>
+                <field name="grid_id" ref="cp_delivery_grid_SmallPacketInternationalAir"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">SmallPacketInternationalAir</field>
+            </record>
+
+            <!-- SmallPacketInternationalSurface -->
+            <record id="cp_delivery_carrier_SmallPacketInternationalSurface" model="delivery.carrier">
+                <field name="name">Canada Post Small Packet Surface (International)</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_cpost"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="cp_delivery_grid_SmallPacketInternationalSurface" model="delivery.grid">
+                <field name="name">SmallPacketInternationalSurface</field>
+                <field name="carrier_id" ref="cp_delivery_carrier_SmallPacketInternationalSurface"/>
+            </record>
+            <record id="cp_delivery_grid_line_SmallPacketInternationalSurface" model="delivery.grid.line">
+                <field name="name">SmallPacketInternationalSurface</field>
+                <field name="grid_id" ref="cp_delivery_grid_SmallPacketInternationalSurface"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">CanadaPost</field>
+                <field name="d_type_keyword">SmallPacketInternationalSurface</field>
+            </record>
+
+        <!-- 
+            UPS
+        -->
+            <!-- UPSStandard -->
+            <record id="ups_delivery_carrier_UPSStandard" model="delivery.carrier">
+                <field name="name">UPS Standard</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_ups"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="ups_delivery_grid_UPSStandard" model="delivery.grid">
+                <field name="name">UPSStandard</field>
+                <field name="carrier_id" ref="ups_delivery_carrier_UPSStandard"/>
+            </record>
+            <record id="ups_delivery_grid_line_UPSStandard" model="delivery.grid.line">
+                <field name="name">UPSStandard</field>
+                <field name="grid_id" ref="ups_delivery_grid_UPSStandard"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">UPS</field>
+                <field name="d_type_keyword">UPSStandard</field>
+            </record>
+
+            <!-- Expedited -->
+            <record id="ups_delivery_carrier_Expedited" model="delivery.carrier">
+                <field name="name">UPS Expedited</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_ups"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="ups_delivery_grid_Expedited" model="delivery.grid">
+                <field name="name">Expedited</field>
+                <field name="carrier_id" ref="ups_delivery_carrier_Expedited"/>
+            </record>
+            <record id="ups_delivery_grid_line_Expedited" model="delivery.grid.line">
+                <field name="name">Expedited</field>
+                <field name="grid_id" ref="ups_delivery_grid_Expedited"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">UPS</field>
+                <field name="d_type_keyword">Expedited</field>
+            </record>
+            
+            <!-- UPSSaver -->
+            <record id="ups_delivery_carrier_UPSSaver" model="delivery.carrier">
+                <field name="name">UPS Saver</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_ups"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="ups_delivery_grid_UPSSaver" model="delivery.grid">
+                <field name="name">UPSSaver</field>
+                <field name="carrier_id" ref="ups_delivery_carrier_UPSSaver"/>
+            </record>
+            <record id="ups_delivery_grid_line_UPSSaver" model="delivery.grid.line">
+                <field name="name">UPSSaver</field>
+                <field name="grid_id" ref="ups_delivery_grid_UPSSaver"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">UPS</field>
+                <field name="d_type_keyword">UPSSaver</field>
+            </record>
+            
+            <!-- Express -->
+            <record id="ups_delivery_carrier_Express" model="delivery.carrier">
+                <field name="name">UPS Express</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_ups"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="ups_delivery_grid_Express" model="delivery.grid">
+                <field name="name">Express</field>
+                <field name="carrier_id" ref="ups_delivery_carrier_Express"/>
+            </record>
+            <record id="ups_delivery_grid_line_Express" model="delivery.grid.line">
+                <field name="name">Express</field>
+                <field name="grid_id" ref="ups_delivery_grid_Express"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">UPS</field>
+                <field name="d_type_keyword">Express</field>
+            </record>
+
+            <!-- ExpressPlus -->
+            <record id="ups_delivery_carrier_ExpressPlus" model="delivery.carrier">
+                <field name="name">UPS Express Plus</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_ups"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="ups_delivery_grid_ExpressPlus" model="delivery.grid">
+                <field name="name">ExpressPlus</field>
+                <field name="carrier_id" ref="ups_delivery_carrier_ExpressPlus"/>
+            </record>
+            <record id="ups_delivery_grid_line_ExpressPlus" model="delivery.grid.line">
+                <field name="name">ExpressPlus</field>
+                <field name="grid_id" ref="ups_delivery_grid_ExpressPlus"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">UPS</field>
+                <field name="d_type_keyword">ExpressPlus</field>
+            </record>
+            
+            <!-- Ground -->
+            <record id="ups_delivery_carrier_Ground" model="delivery.carrier">
+                <field name="name">UPS Ground</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_ups"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="ups_delivery_grid_Ground" model="delivery.grid">
+                <field name="name">Ground</field>
+                <field name="carrier_id" ref="ups_delivery_carrier_Ground"/>
+            </record>
+            <record id="ups_delivery_grid_line_Ground" model="delivery.grid.line">
+                <field name="name">Ground</field>
+                <field name="grid_id" ref="ups_delivery_grid_Ground"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">UPS</field>
+                <field name="d_type_keyword">Ground</field>
+            </record>
+
+            <!-- 3DaySelect -->
+            <record id="ups_delivery_carrier_3DaySelect" model="delivery.carrier">
+                <field name="name">UPS 3 Day Select</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_ups"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="ups_delivery_grid_3DaySelect" model="delivery.grid">
+                <field name="name">3DaySelect</field>
+                <field name="carrier_id" ref="ups_delivery_carrier_3DaySelect"/>
+            </record>
+            <record id="ups_delivery_grid_line_3DaySelect" model="delivery.grid.line">
+                <field name="name">3DaySelect</field>
+                <field name="grid_id" ref="ups_delivery_grid_3DaySelect"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">UPS</field>
+                <field name="d_type_keyword">3DaySelect</field>
+            </record>
+
+            <!-- 2ndDayAir -->
+            <record id="ups_delivery_carrier_2ndDayAir" model="delivery.carrier">
+                <field name="name">UPS 2 Day Air</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_ups"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="ups_delivery_grid_2ndDayAir" model="delivery.grid">
+                <field name="name">2ndDayAir</field>
+                <field name="carrier_id" ref="ups_delivery_carrier_2ndDayAir"/>
+            </record>
+            <record id="ups_delivery_grid_line_2ndDayAir" model="delivery.grid.line">
+                <field name="name">2ndDayAir</field>
+                <field name="grid_id" ref="ups_delivery_grid_2ndDayAir"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">UPS</field>
+                <field name="d_type_keyword">2ndDayAir</field>
+            </record>
+
+            <!-- NextDayAirSaver -->
+            <record id="ups_delivery_carrier_NextDayAirSaver" model="delivery.carrier">
+                <field name="name">UPS Next Day Air Saver</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_ups"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="ups_delivery_grid_NextDayAirSaver" model="delivery.grid">
+                <field name="name">NextDayAirSaver</field>
+                <field name="carrier_id" ref="ups_delivery_carrier_NextDayAirSaver"/>
+            </record>
+            <record id="ups_delivery_grid_line_NextDayAirSaver" model="delivery.grid.line">
+                <field name="name">NextDayAirSaver</field>
+                <field name="grid_id" ref="ups_delivery_grid_NextDayAirSaver"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">UPS</field>
+                <field name="d_type_keyword">NextDayAirSaver</field>
+            </record>
+            
+            <!-- NextDayAir -->
+            <record id="ups_delivery_carrier_NextDayAir" model="delivery.carrier">
+                <field name="name">UPS Next Day Air</field>
+                <field name="normal_price">0</field>
+                <field name="partner_id" ref="res_partner_ups"/>
+                <field name="product_id" ref="product_product_delivery_product"/>
+                <field name="use_detailed_pricelist" eval="True"/>
+                <field name="website_published" eval="True"/>
+            </record>
+            <record id="ups_delivery_grid_NextDayAir" model="delivery.grid">
+                <field name="name">NextDayAir</field>
+                <field name="carrier_id" ref="ups_delivery_carrier_NextDayAir"/>
+            </record>
+            <record id="ups_delivery_grid_line_NextDayAir" model="delivery.grid.line">
+                <field name="name">NextDayAir</field>
+                <field name="grid_id" ref="ups_delivery_grid_NextDayAir"/>
+                <field name="operator">&gt;=</field>
+                <field eval="0" name="max_value"/>
+                <field eval="2" name="list_price"/>
+                <field eval="0" name="standard_price"/>
+                <field name="price_type">easypost</field>
+                <field name="d_carrier_keyword">UPS</field>
+                <field name="d_type_keyword">NextDayAir</field>
+            </record>
+    </data>
+</openerp>

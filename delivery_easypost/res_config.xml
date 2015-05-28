@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_easypost_config_settings" model="ir.ui.view">
+            <field name="name">Easypost settings</field>
+            <field name="model">easypost.config.settings</field>
+            <field name="arch" type="xml">
+                <form string="Configure Easypost" version="7.0" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+
+                    <separator string="Easypost"/>
+                    <group>
+                        <label for="id" string="Easypost Settings"/>
+                        <div>
+                            <div>
+                                <label for="default_ep_apikey"/>
+                                <field name="default_ep_apikey" class="oe_inline"/>
+                            </div>
+                        </div>
+                    </group>
+                    <group>
+                        <label for="id" string="Easypost Address"/>
+                        <div>
+
+                            <div>
+                                <label for="default_ep_company"/>
+                                <field name="default_ep_company" class="oe_inline"/>
+                            </div>
+
+                            <div>
+                                <label for="default_ep_phone"/>
+                                <field name="default_ep_phone" class="oe_inline"/>
+                            </div>
+
+                            <div>
+                                <label for="default_ep_street1"/>
+                                <field name="default_ep_street1" class="oe_inline"/>
+                            </div>
+
+                            <div>
+                                <label for="default_ep_street2"/>
+                                <field name="default_ep_street2" class="oe_inline"/>
+                            </div>
+
+                            <div>
+                                <label for="default_ep_city"/>
+                                <field name="default_ep_city" class="oe_inline"/>
+                            </div>
+
+                            <div>
+                                <label for="default_ep_state"/>
+                                <field name="default_ep_state" class="oe_inline"/>
+                            </div>
+
+                            <div>
+                                <label for="default_ep_zip"/>
+                                <field name="default_ep_zip" class="oe_inline"/>
+                            </div>
+
+                            <div>
+                                <label for="default_ep_country"/>
+                                <field name="default_ep_country" class="oe_inline"/>
+                            </div>
+
+                            <div>
+                                <label for="default_ep_email"/>
+                                <field name="default_ep_email" class="oe_inline"/>
+                            </div>
+                        </div>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_easypost_configuration" model="ir.actions.act_window">
+            <field name="name">Easypost Settings</field>
+            <field name="res_model">easypost.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem id="menu_easypost_configuration" name="Easypost Settings" parent="base.menu_config"
+            sequence="16" action="action_easypost_configuration"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="tof_delivery_grid_line_form">
+            <field name="name">tof_delivery.grid.line.form</field>
+            <field name="model">delivery.grid.line</field>
+            <field name="inherit_id" ref="delivery.view_delivery_grid_line_form" />
+            <field name="arch" type="xml">
+                <label string=" in Function of " position="attributes">
+                    <attribute name="attrs">{'invisible':[('price_type','!=','variable')]}</attribute>
+                </label>
+                <field name="variable_factor" position="attributes">
+                    <attribute name="attrs">{'invisible':[('price_type','!=','variable')]}</attribute>
+                </field>
+                <field name="variable_factor" position="after">
+                    <label string=" with carrier " class="oe_inline" attrs="{'invisible':[('price_type','!=','easypost')]}"/>
+                    <field name="d_carrier_keyword" attrs="{'invisible':[('price_type','!=','easypost')]}" class="oe_inline"/>
+                    <label string=" and type specifier of " class="oe_inline" attrs="{'invisible':[('price_type','!=','easypost')]}"/>
+                    <field name="d_type_keyword" attrs="{'invisible':[('price_type','!=','easypost')]}" class="oe_inline"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
